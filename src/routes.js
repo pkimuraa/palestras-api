@@ -1,15 +1,16 @@
 const express = require('express');
 const routes = express.Router();
 const UserCotroller = require('./controllers/UserController');
-const TaskCotroller = require('./controllers/TaskController');
+const EventCotroller = require('./controllers/EventController');
 
 
 
 routes.get('/users', UserCotroller.index);
 routes.post('/users', UserCotroller.store); 
-routes.post('/users/task/:id', UserCotroller.tasksByUser); 
+routes.post('/event/join', UserCotroller.eventsByUser); 
 
-routes.get('/tasks', TaskCotroller.index);
-routes.post('/tasks', TaskCotroller.create); 
+
+routes.get('/events', EventCotroller.index);
+routes.post('/events', EventCotroller.create); 
 
 module.exports = routes;

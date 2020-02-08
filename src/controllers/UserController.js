@@ -1,5 +1,6 @@
 const axios = require('axios')
 const User = require('../models/User');
+const Event = require('../models/Event');
 
 module.exports= {
   async index(req, res){
@@ -28,10 +29,34 @@ module.exports= {
   
   },
 
-  async tasksByUser(req, res){
-    const { id } = req.params;
-    const user = await User.findById(id).populate('tasks');
-    res.send(user.tasks);
+  async eventsByUser(req, res){
+    const { userId, eventId } = req.body;
+    
+    let event;
+    let user;
+
+    try {
+      event = await Event.findById(eventId);
+      user = await User.findById(userId);
+    }
+    catch (err) {
+      console.log(event);
+      return res.json({error: 'Could not find the event'});
+    }
+
+    if(!event || !user){
+      return res.json({error: 'Could not find the event'});
+    }
+    
+    if(event.participants.includes(userId)){
+      return res.json({error: "User already attending"})
+    }
+    
+    event.participants.push(userId);
+    await event.save();
+
+    return res.json({event})
   },
+
 
 }

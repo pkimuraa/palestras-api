@@ -11,8 +11,8 @@ const UserSchema = new mongoose.Schema({
     type: Number,
     default: 0
   },
-  tasks : [
-    {type: mongoose.Schema.Types.ObjectId,ref:'Task'}
+  events : [
+    {type: mongoose.Schema.Types.ObjectId,ref:'Event'}
   ]
 });
 
