@@ -29,7 +29,7 @@ module.exports= {
   
   },
 
-  async eventsByUser(req, res){
+  async signUserInEvent(req, res){
     const { userId, eventId } = req.body;
     
     let event;

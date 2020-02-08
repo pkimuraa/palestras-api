@@ -7,7 +7,7 @@ const EventCotroller = require('./controllers/EventController');
 
 routes.get('/users', UserCotroller.index);
 routes.post('/users', UserCotroller.store); 
-routes.post('/event/join', UserCotroller.eventsByUser); 
+routes.post('/event/join', UserCotroller.signUserInEvent); 
 
 
 routes.get('/events', EventCotroller.index);
