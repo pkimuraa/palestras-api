@@ -1,4 +1,5 @@
 const axios = require('axios')
+const bcrypt = require('bcrypt');
 const User = require('../models/User');
 const Event = require('../models/Event');
 
@@ -9,16 +10,15 @@ module.exports= {
   },
 
   async store(req, res){
-    const {name, github_username, entry_date} = req.body;
-
+    const {name, github_username, entry_date, password} = req.body;
     const user = await User.findOne({github_username});
-
     if(!user) {
       const apiRes = await axios.get(`https://api.github.com/users/${github_username}`);
       const {login, avatar_url, bio} = apiRes.data;
       const user = await User.create({
         name,
         entry_date,
+        password,
         login,
         github_username,
         avatar_url,
@@ -58,5 +58,6 @@ module.exports= {
     return res.json({event})
   },
 
+  
 
 }
