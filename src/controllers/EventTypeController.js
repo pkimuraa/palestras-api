@@ -1,16 +1,18 @@
-const Event = require ('../models/Event')
-const User = require ('../models/User')
-const axios = require('axios')
+const EventType = require("../models/EventType");
 
-module.exports= {
+module.exports = {
   async create(req, res) {
-    const {title, points} = req.body
+    const { title, points } = req.body;
 
     const eventType = await EventType.create({
       title,
       points
-    })
-    return res.json({eventType})
-  }
-}
+    });
+    return res.json({ eventType });
+  },
 
+  async show(req, res) {
+    const types = await EventType.find();
+    return res.json(types);
+  }
+};
