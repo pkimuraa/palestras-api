@@ -5,6 +5,7 @@ const EventCotroller = require("./controllers/EventController");
 const EventTypeCotroller = require("./controllers/EventTypeController");
 
 routes.get("/users", UserCotroller.index);
+routes.get("/users/:id", UserCotroller.findById);
 routes.post("/users", UserCotroller.store);
 routes.post("/event/join", UserCotroller.signUserInEvent);
 
